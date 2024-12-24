@@ -18,11 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('/signup', [AuthController::class, 'sign_up']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/login', function () {
+    return response()->json(['message' => 'Unauthenticated.'], 401);
+})->name('login');
+
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+
     // Route::resource('tasks', TaskController::class);
     Route::group(['middleware' => ["my_tasks"]], function () {
         Route::put('tasks/{id}', [TaskController::class, 'update']);

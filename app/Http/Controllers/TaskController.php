@@ -29,29 +29,23 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         try{
             $validated = $request->validate([
-                'user_id' => 'required',
                 'title' => 'required|max:500',
                 'description' => 'nullable',
                 'status' => 'required',
             ]);
 
+            $validated['user_id'] = Auth::user()->id;
+
             $task = Task::create($validated);
+
+            //Dispatching the Event
             TaskCreated::dispatch($task);
-            // Log::info("Task created without dispatch ", ['task' => $task]);
             return response()->json(['message'=> 'Task created successfully', 'task' => $task], 201);
         }catch(Exception $e){
             return response()->json(['Task Not Available'], 404);
@@ -75,27 +69,20 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
         try{
             $validated = $request->validate([
-                'user_id' => 'required',
                 'title' => 'required|max:500',
                 'description' => 'nullable',
                 'status' => 'required',
             ]);
+            
+            $validated['user_id'] = Auth::user()->id;
 
-            $task = Task::where('user_id', Auth::user()->id)->where('id', $id)->first();
+            $task = Task::where('id', $id)->first();
             if(!$task){
                 return response()->json(['Task Not Available'], 404);
             }

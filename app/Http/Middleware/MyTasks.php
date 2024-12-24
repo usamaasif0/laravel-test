@@ -18,10 +18,12 @@ class MyTasks
     public function handle(Request $request, Closure $next)
     {
         $task_id = $request->route('id');
+
         $task = Task::where('id', $task_id)->first();
+        
         $logged_user_id = Auth::user()->id;
-        if ($logged_user_id != $task->user_id) {
-            return response()->json(['message' => 'user has no permission to update this record'], 403);
+        if ($logged_user_id != $task?->user_id) {
+            return response()->json(['message' => 'User has no permission to update this record'], 403);
         }
         
 
