@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */

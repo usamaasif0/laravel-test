@@ -23,6 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
-    Route::resource('tasks', TaskController::class);
-    // Route::post('tasks', [TaskController::class, 'store']);
+    // Route::resource('tasks', TaskController::class);
+    Route::group(['middleware' => ["my_tasks"]], function () {
+        Route::put('tasks/{id}', [TaskController::class, 'update']);
+    });
+
+    Route::get('tasks', [TaskController::class, 'index']);
+    Route::post('tasks', [TaskController::class, 'store']);
+    Route::get('tasks/{id}', [TaskController::class, 'show']);
+    Route::delete('tasks/{id}', [TaskController::class, 'destroy']);
 });
