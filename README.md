@@ -1,4 +1,4 @@
-# AALA IT Solution Test Steps
+# AALA IT Solution Test
 
 ## Step 1 : Project Setup
 * Create project by using this command
