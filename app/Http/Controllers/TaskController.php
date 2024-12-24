@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TaskCreated;
 use App\Models\Task;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -47,6 +49,8 @@ class TaskController extends Controller
             ]);
 
             $task = Task::create($validated);
+            TaskCreated::dispatch($task);
+            // Log::info("Task created without dispatch ", ['task' => $task]);
             return response()->json(['message'=> 'Task created successfully', 'task' => $task], 201);
         }catch(Exception $e){
             return response()->json(['Task Not Available'], 404);
