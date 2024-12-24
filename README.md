@@ -1,73 +1,66 @@
-# Laravel Test Assignment
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-## Objective
-Build a simple task management API that allows users to create, read, update, and delete tasks. The API should also include user authentication and authorization. Additionally, implement an event listener to handle task creation notifications.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Requirements
+## About Laravel
 
-1. **Setup:**
-   - Create a fork of this repo.
-   - Create a new Laravel project in your fork.
-   - Use Laravel Sanctum for API authentication.
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-3. **Database:**
-   - Create a migration for a `users` table (if not already provided by Laravel).
-   - Create a migration for a `tasks` table with the following fields:
-     - `id`: Primary key
-     - `user_id`: Foreign key referencing the `users` table
-     - `title`: String
-     - `description`: Text
-     - `status`: Enum (values: 'pending', 'in_progress', 'completed')
-     - `created_at`: Timestamp
-     - `updated_at`: Timestamp
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-4. **Models:**
-   - Create a `Task` model and define the relationship with the `User ` model (one-to-many).
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-5. **Controllers:**
-   - Create a `TaskController` with the following methods:
-     - `index()`: List all tasks for the authenticated user.
-     - `store(Request $request)`: Create a new task. Validate the request data and dispatch an event for task creation.
-     - `show($id)`: Show a specific task for the authenticated user.
-     - `update(Request $request, $id)`: Update a specific task. Validate the request data.
-     - `destroy($id)`: Delete a specific task.
+## Learning Laravel
 
-6. **Events and Listeners:**
-   - Create an event called `TaskCreated` that is dispatched when a new task is created.
-   - Create a listener called `SendTaskCreatedNotification` that listens for the `TaskCreated` event and handles the notification (e.g., log a message or send an email).
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-7. **Queues:**
-   - Configure the listener to be queued, so the notification is processed asynchronously. Ensure that the queue driver is set up (e.g., using the `sync` driver for simplicity).
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-8. **Routes:**
-   - Define API routes for the task management functionality in `routes/api.php`:
-     - `GET /tasks`: List all tasks
-     - `POST /tasks`: Create a new task
-     - `GET /tasks/{id}`: Show a specific task
-     - `PUT /tasks/{id}`: Update a specific task
-     - `DELETE /tasks/{id}`: Delete a specific task
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-9. **Middleware:**
-   - Implement middleware to ensure that users can only access their own tasks. Apply this middleware to the task routes.
+## Laravel Sponsors
 
-10. **Documentation:**
-    - Provide a brief README file explaining how to set up the project, run migrations, and test the API endpoints using Postman or any other API client.
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-## Evaluation Criteria
+### Premium Partners
 
-- **Code Quality:** Clean, readable, and maintainable code.
-- **Use of Laravel Features:** Proper use of Eloquent, middleware, events, listeners, and queues.
-- **Documentation:** Clarity and completeness of the README file.
-- **Time Management:** Ability to complete the assignment within the 5 hours.
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-## Submission
+## Contributing
 
-Please submit your code via a GitHub repository link along with the README file.
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Notes
+## Code of Conduct
 
-- You may use any additional packages or libraries that you find necessary.
-- Focus on implementing the core features; additional features (like pagination, sorting, etc.) are optional and can be added if time permits.
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-# 1. Make sure to commit each step from requirements seperatly with proper commit message what is done in this commit. The more the commits, the more we love it
-# 2. Any code generated by AI tools will result in immediate failure
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
